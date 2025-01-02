@@ -51,7 +51,7 @@ export const usePhotoGallery = () => {
         photos.value = photosInPreferences;
     };
 
-    const savePicture = async (photo: Photo, fileName: string): Promise<{ filepath: string; webviewPath: string | undefined }> => {
+    const savePicture = async (photo: Photo, fileName: string): Promise<{ filepath: string; webviewPath: string }> => {
         let base64Data: string | Blob;
         // "hybrid" will detect mobile - iOS or Android
         if (isPlatform('hybrid')) {
