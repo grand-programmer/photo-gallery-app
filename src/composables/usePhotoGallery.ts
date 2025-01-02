@@ -12,7 +12,7 @@ export interface UserPhoto {
 
 export const usePhotoGallery = () => {
     const PHOTO_STORAGE = 'photos';
-    const photos = ref<UserPhoto[]>([]);
+    const photos = ref<UserPhoto[]>([{filepath:"",webviewPath:""}]);
 
     const convertBlobToBase64 = (blob: Blob): Promise<string> =>
         new Promise((resolve, reject) => {
@@ -74,7 +74,7 @@ export const usePhotoGallery = () => {
         if (isPlatform('hybrid')) {
             // Display the new image by rewriting the 'file://' path to HTTP
             // Details: https://ionicframework.com/docs/building/webview#file-protocol
-            let filepath: string =savedFile.uri||""
+            let filepath: string =savedFile.uri||"";
             return {
                 filepath: filepath,
                 webviewPath: Capacitor.convertFileSrc(filepath),
@@ -82,8 +82,8 @@ export const usePhotoGallery = () => {
         } else {
             // Use webPath to display the new image instead of base64 since it's
             // already loaded into memory
-            let filepath: string =fileName
-            let webviewPath: string = photo.webPath||""
+            let filepath: string =fileName;
+            let webviewPath: string = photo.webPath||"";
             return {
                 filepath: filepath,
                 webviewPath: webviewPath,
@@ -96,7 +96,7 @@ export const usePhotoGallery = () => {
         photos.value = photos.value.filter((p) => p.filepath !== photo.filepath);
 
         // delete photo file from filesystem
-        const filename = (typeof photo.filepath ==="string")?photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1):'';
+        const filename = photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1);
         await Filesystem.deleteFile({
             path: filename,
             directory: Directory.Data,
@@ -111,6 +111,7 @@ export const usePhotoGallery = () => {
         });
 
         const fileName = new Date().getTime() + '.jpeg';
+
         const savedFileImage = await savePicture(photo, fileName);
 
         photos.value = [savedFileImage, ...photos.value];
