@@ -92,7 +92,7 @@ export const usePhotoGallery = () => {
         photos.value = photos.value.filter((p) => p.filepath !== photo.filepath);
 
         // delete photo file from filesystem
-        const filename = photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1);
+        const filename = (typeof photo.filepath ==='string')?photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1):'';
         await Filesystem.deleteFile({
             path: filename,
             directory: Directory.Data,
