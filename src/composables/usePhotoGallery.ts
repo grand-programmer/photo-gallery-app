@@ -6,8 +6,8 @@ import { isPlatform } from '@ionic/vue';
 import { Capacitor } from '@capacitor/core';
 
 export interface UserPhoto {
-    filepath: string;
-    webviewPath?: string | undefined;
+    filepath: {default:'', type: string};
+    webviewPath?: {default:'', type: string};
 }
 
 export const usePhotoGallery = () => {
