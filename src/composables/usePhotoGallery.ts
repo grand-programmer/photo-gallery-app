@@ -7,7 +7,7 @@ import { Capacitor } from '@capacitor/core';
 
 export interface UserPhoto {
     filepath:  string;
-    webviewPath: string|undefined;
+    webviewPath?: string;
 }
 
 export const usePhotoGallery = () => {
