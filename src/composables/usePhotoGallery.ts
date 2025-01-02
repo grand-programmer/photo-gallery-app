@@ -110,9 +110,9 @@ export const usePhotoGallery = () => {
             quality: 100,
         });
 
-        const fileName = new Date().getTime() + '.jpeg';
-        if(typeof photo['webviewPath'] ==='undefined') photo['webviewPath'] = "";
-        const savedFileImage = await savePicture(photo, fileName);
+        const fileName = new Date().getTime() + '.jpeg'; 
+        //if(typeof photo['webviewPath'] ==='undefined') photo['webviewPath'] = "";
+        const savedFileImage = await savePicture({...photo,webviewPath:((typeof photo.webviewPath !=='undefined')?photo.webviewPath:"")}, fileName);
 
         photos.value = [savedFileImage, ...photos.value];
     };
