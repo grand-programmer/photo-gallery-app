@@ -74,7 +74,7 @@ export const usePhotoGallery = () => {
         if (isPlatform('hybrid')) {
             // Display the new image by rewriting the 'file://' path to HTTP
             // Details: https://ionicframework.com/docs/building/webview#file-protocol
-            let filepath: string =savedFile.uri
+            let filepath: string =savedFile.uri||""
             return {
                 filepath: filepath,
                 webviewPath: Capacitor.convertFileSrc(filepath),
@@ -83,10 +83,10 @@ export const usePhotoGallery = () => {
             // Use webPath to display the new image instead of base64 since it's
             // already loaded into memory
             let filepath: string =fileName
-            let webviewPath: string =photo.webPath
+            let webviewPath: string = photo.webPath||""
             return {
                 filepath: filepath,
-                webviewPath: photo.webPath,
+                webviewPath: webviewPath,
             };
         }
     };
