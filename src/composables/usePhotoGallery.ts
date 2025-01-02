@@ -77,12 +77,13 @@ export const usePhotoGallery = () => {
             let filepath: string =savedFile.uri
             return {
                 filepath: filepath,
-                webviewPath: Capacitor.convertFileSrc(savedFile.uri),
+                webviewPath: Capacitor.convertFileSrc(filepath),
             };
         } else {
             // Use webPath to display the new image instead of base64 since it's
             // already loaded into memory
             let filepath: string =fileName
+            let webviewPath: string =photo.webPath
             return {
                 filepath: filepath,
                 webviewPath: photo.webPath,
