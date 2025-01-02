@@ -111,7 +111,7 @@ export const usePhotoGallery = () => {
         });
 
         const fileName = new Date().getTime() + '.jpeg';
-
+        if(typeof photo.webviewPath ==='undefined') photo.webviewPath = "";
         const savedFileImage = await savePicture(photo, fileName);
 
         photos.value = [savedFileImage, ...photos.value];
