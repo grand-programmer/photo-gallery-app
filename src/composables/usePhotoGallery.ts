@@ -7,7 +7,7 @@ import { Capacitor } from '@capacitor/core';
 
 export interface UserPhoto {
     filepath:  string;
-    webviewPath?: string;   
+    webviewPath?: string;
 }
 
 export const usePhotoGallery = () => {
@@ -111,7 +111,7 @@ export const usePhotoGallery = () => {
         });
 
         const fileName = new Date().getTime() + '.jpeg';
-        if(typeof photo.webviewPath ==='undefined') photo.webviewPath = "";
+        if(typeof photo['webviewPath'] ==='undefined') photo['webviewPath'] = "";
         const savedFileImage = await savePicture(photo, fileName);
 
         photos.value = [savedFileImage, ...photos.value];
