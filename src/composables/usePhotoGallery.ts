@@ -50,7 +50,7 @@ export const usePhotoGallery = () => {
         photos.value = photosInPreferences;
     };
 
-    const savePicture = async (photo: Photo, fileName: string): Promise<UserPhoto> => {
+    const savePicture = async (photo: Photo, fileName: string): Promise<{ filepath: string; webviewPath: string | undefined }> => {
         let base64Data: string | Blob;
         // "hybrid" will detect mobile - iOS or Android
         if (isPlatform('hybrid')) {
@@ -92,7 +92,7 @@ export const usePhotoGallery = () => {
         photos.value = photos.value.filter((p) => p.filepath !== photo.filepath);
 
         // delete photo file from filesystem
-        const filename = (typeof photo.filepath ==='string')?photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1):'';
+        const filename = (typeof photo.filepath ==='String')?photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1):'';
         await Filesystem.deleteFile({
             path: filename,
             directory: Directory.Data,
