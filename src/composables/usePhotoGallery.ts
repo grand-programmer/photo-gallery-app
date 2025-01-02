@@ -38,8 +38,9 @@ export const usePhotoGallery = () => {
         // If running on the web...
         if (!isPlatform('hybrid')) {
             for (const photo of photosInPreferences) {
+                let filepath: string =photo.filepath
                 const file = await Filesystem.readFile({
-                    path: photo.filepath,
+                    path: filepath,
                     directory: Directory.Data,
                 });
                 // Web platform only: Load the photo as base64 data
@@ -73,15 +74,17 @@ export const usePhotoGallery = () => {
         if (isPlatform('hybrid')) {
             // Display the new image by rewriting the 'file://' path to HTTP
             // Details: https://ionicframework.com/docs/building/webview#file-protocol
+            let filepath: string =savedFile.uri
             return {
-                filepath: savedFile.uri,
+                filepath: filepath,
                 webviewPath: Capacitor.convertFileSrc(savedFile.uri),
             };
         } else {
             // Use webPath to display the new image instead of base64 since it's
             // already loaded into memory
+            let filepath: string =fileName
             return {
-                filepath: fileName,
+                filepath: filepath,
                 webviewPath: photo.webPath,
             };
         }
